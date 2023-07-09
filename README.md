@@ -5,7 +5,7 @@
   </picture>
 </p>
 
-Maximise your productivity and streamline your terminal experience with Zchat (zch) - a command-line productivity tool powered by OpenAI's [ChatGPT][chatgpt] models. Quickly generate Linux commands and code snippets from natural language queries without the need to manually search the web. Leverage AI capabilities to get accurate answers directly in your terminal in a time and effort-efficient manner. Furthermore, Zchat's Git integration makes working with version control even simpler - goodbye cheat sheets and notes. Get the job done quickly and easily.
+Boost your productivity and enhance your terminal experience using Zchat (zch). This command-line productivity tool is powered by OpenAI's ChatGPT models. With Zchat, you don't need to scour the web for Linux commands and code snippets. Simply type in comprehensive language queries and let the system generate the results for you. Zchat's AI capabilities provide precise responses directly in your terminal, saving your time and effort. Additionally, Zchat's intuitive Git integration simplifies your version control processes – bidding farewell to cheat sheets and notes. With Zchat, complete tasks quickly and conveniently.
 
 <br>
 
@@ -19,7 +19,12 @@ Maximise your productivity and streamline your terminal experience with Zchat (z
 
 ## Create your OpenAI API Key
 
-To use Zchat, you'll first need to obtain the API key. This can be done by generating a new secret key from your OpenAI account, which will be required for authentication. To get started, you can obtain the key by following these steps. First, log in to your [OpenAI account][open-ai-account]. Next, look for the "Create new secret key" option and click on it.
+To utilise Zchat, you initially need to procure the API key. You can generate this key from your OpenAI account, which will subsequently be used for authentication. Here's how to get your API key:
+
+1. Sign in to your [OpenAI account][open-ai-account].
+2. Search for the "Create new secret key" option and select it.
+
+This API key serves as your passport to access and engage with Zchat.
 
 <p align="center">
   <picture>
@@ -81,15 +86,15 @@ git clone https://github.com/nicolodiamante/zchat.git $ZSH_CUSTOM/plugins/zchat
 
 ### Setting up dependencies
 
-Once the installation is complete, open your zshrc file. Paste your OpenAI API Key to the `OPENAI_API_KEY` variable. By default, the script uses the GPT-3.5-turbo model. For most basic tasks, there is not much difference between GPT-4 and GPT-3.5 models. To use the latest GPT-4 model, just change the current model to `gpt-4`.
+After completing the installation process, please open your zshrc file. Copy and paste your OpenAI API Key into the `OPENAI_API_KEY` variable slot. The script is programmed to use the GPT-4 model by default. However, it should be noted that access to GPT-4 API is limited only to APIs with proven successful payment history. If you have not met the qualifications for accessing GPT-4, we recommend opting for the GPT-3.5-Turbo model instead.
 
 ```shell
 # Zchat dependencies.
 export OPENAI_API_KEY=""
-export OPENAI_GPT_MODEL="gpt-3.5-turbo"
+export OPENAI_GPT_MODEL="gpt-4"
 ```
 
-> If you are not enrolled in the limited beta program for GPT-4, you will need to join a waiting list to use its API. Since developers have been given priority, it is unclear when non-developers will be granted access. Until that time, users should select the GPT-3.5-Turbo model as an alternative.
+> For Zchat to function properly, jq must be installed on your operating system. The script will automatically check for this software. If it isn't detected, the script will proceed with the necessary installation.
 
 <br>
 
@@ -101,15 +106,15 @@ zch <description of task>
 
 ### Completion
 
-- Type `zch` to initiate the completion follow by the command that will be used as a basis for your query.
-- Once you have written a natural language version of what you intend to do, press "enter" to execute it.
+1. To initiate the completion, simply type 'zch' followed by the command that you want to use for your query.
+2. After formulating your query in natural language, press the 'Enter' key to execute it.
 
 <br><br>
 
 <p align="center">
   <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="https://github.com/nicolodiamante/zchat/assets/48920263/ff9078f7-22a3-4dcd-b76a-a2df31b20f9b" draggable="false" ondragstart="return false;" alt="Zchat Completion" title="Zchat Completion" />
-    <img src="https://github.com/nicolodiamante/zchat/assets/48920263/8e9effe9-a1dc-4237-a04e-9850a370716f" draggable="false" ondragstart="return false; "alt="Zchat Completion" title="Zchat Completion" width="560px" />
+    <source media="(prefers-color-scheme: dark)" srcset="https://github.com/nicolodiamante/zchat/assets/48920263/ee1f5e25-1480-4bb8-9986-853d8964ea02" draggable="false" ondragstart="return false;" alt="Zchat Completion" title="Zchat Completion" />
+    <img src="https://github.com/nicolodiamante/zchat/assets/48920263/fd62ca6a-7c51-42a4-a82d-4bc05f3ea3d9" draggable="false" ondragstart="return false; "alt="Zchat Completion" title="Zchat Completion" width="650px" />
   </picture>
 </p>
 
@@ -117,7 +122,7 @@ zch <description of task>
 
 ## Notes
 
-When you launch Zchat, it will automatically check if you are in a Git repository. If you are, it will provide relevant Git commands and guidance. If not, Zchat will help you access the right command line tools and find the best solution to complete your task.
+Upon launching Zchat, the script automatically checks whether you're in a Git repository. If it determines that you are, Zchat will present relevant Git commands and provide guidance. If you're not in a Git repository, Zchat assists you in accessing the appropriate command line tools to find the most effective solution for your task.
 
 ### Resources
 
@@ -159,7 +164,6 @@ Thank you for considering using Zchat. Any suggestions or feedback you may have 
 <!-- Link labels: -->
 [open-ai-account]: https://chat.openai.com/auth/login
 [open-ai-API]: https://beta.openai.com/account/api-keys
-[chatgpt]: https://openai.com/blog/chatgpt
 [open-ai-models]: https://platform.openai.com/docs/models
 [intro]: https://platform.openai.com/docs/introduction
 [chat-completions]: https://platform.openai.com/docs/guides/chat

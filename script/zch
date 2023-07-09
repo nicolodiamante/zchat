@@ -24,7 +24,7 @@ zch() {
   fi
 
   if [[ -z "$OPENAI_GPT_MODEL" ]]; then
-    echo "zchat: the OPENAI_GPT_MODEL appears not to be set. By default this script is set to used GPT-3.5-turbo model. For many basic tasks, the difference between GPT-4 and GPT-3.5 models is not significant. However, in more complex reasoning situations, GPT-4 is much more capable than any of previous models. If you want to use the latest model version GPT-4 you just need to change the current number to 4. Keep in mind  GPT-4 is currently in a limited beta and not everyone, even if they are on a paid plan, has access to GPT-4 API."
+    echo "zchat: It seems the OPENAI_GPT_MODEL is not specified. By default, this script operates on the GPT-4 model. Comparatively, the GPT-4 and GPT-3.5 models display minimal differences in performance for less complex tasks. However, GPT-4 significantly outshines previous models in handling intricate reasoning scenarios. It's important to note that only APIs with a record of successful payments can access the GPT-4 API. If the GPT-4 qualifications are not met, it's advisable to use the GPT-3.5-Turbo model."
     return 1
   else
     chatGPT_model="$OPENAI_GPT_MODEL"
@@ -50,17 +50,17 @@ zch() {
 # Request body.
   user_input="$@"
   model="$chatGPT_model"
-  temperature=0.5
-  top_p=0.0
+  temperature=0.16
+  top_p=1
   presence_penalty=0.0
   frequency_penalty=0.0
-  max_tokens=257
+  max_tokens=1024
 
-  # Check if current directory is a Git repository.
+  # Prompt.
   if [[ -d .git ]]; then
-    message="You are Zchat, my autocomplete script, and your goal is to help me navigate my Linux system, starting from the current directory, which is a git repository. What GIT command should I copy and paste into the terminal in order to achieve the desired result of ${user_input}? Provide only a valid GIT command${OS}, and nothing else. You do not write any human-readable explanations. If you fail to answer, return 'zchat: failed to generate command'."
+    message="As Zchat, your role is to act as an autocomplete program that assists me in managing my Linux operating system. Your base of operations begins from the currently active directory, which also doubles as a git repository for version control purposes. Upon receiving my inquiry captured in the variable ${user_input}, you have the task of identifying and recommending a suitable GIT command that I can input into the Linux terminal for execution. Keep in mind, the command issued should strictly be valid GIT software commands and pertinent to the ${OS} operating system. Ensure to exclude any additional information from the response and focus solely on delivering the mapped GIT commands. Your responses should, at all times, lack any explanation or clarifications that a human would find elucidative. In the event you are unable to deduce or produce a GIT command based on my input, it's required for you to give the following response: 'zchat: failed to generate command'. This will indicate that the formulation of a suitable command was unsuccessful."
   else
-    message="You are Zchat, my autocomplete script, and your task is to assist me in navigating my Linux. All the questions I'm asking will be related to this subject. Now, I'd like you to answer this: ${user_input}. Please provide a valid command${OS} as a single line of text (no code blocks, quotes, or anything else outside the command itself) that takes into consideration my current directory (using either '.' or $(pwd)) and doesn't put my system at risk in any way. It's acceptable to chain commands, but prioritize one-liners if possible. If you can't find a suitable command, answer with 'zchat: failed to generate command'."
+    message="You are to act as Zchat, an autocomplete script that I utilise as an aid in manoeuvring my Linux operating system. Your function largely revolves around fielding all queries that I have pertaining to the Linux operating system. In light of this, I now require your assistance - outlined as ${user_input} - and am requesting a response. The expected response from you should be a valid ${OS} command, to be presented as an uncomplicated, solitary line of text. Please abstain from the use of code blocks or quotes; keep everything within the scope of the command you provide. The command you propose should accommodate the consideration of my existing directory, which can be signified by either a simple '.' or the command `$(pwd)`. Make sure that the command you offer does not pose any risk to the integrity or stability of my operating system. It's agreeable to chain multiple commands together if necessary, but with a preferable emphasis placed on simplicity - aim to propose one-liner commands where possible. In the eventuality that you are unable to generate a suitable command based on my request, the appropriate response should be: 'zchat: failed to generate command'."
   fi
 
   if command -v curl &> /dev/null; then
@@ -93,8 +93,8 @@ zch() {
 
   # Add some colour.
   autoload -Uz colors && colors
-  promp_default='%F{green}→%f'
-  promp_error='%F{red}→%f'
+  promp_default='%F{green}›%f'
+  promp_error='%F{red}›%f'
 
   ERROR_MESSAGE=$(printf "%s" "$response" | jq -r '(.error.message // "") | @json' | sed 's/^"//;s/"$//')
   COMMAND=$(printf "%s" "$response" | jq -r '(.choices[0].message.content // "") | @json' | sed 's/^"//;s/"$//')
@@ -104,15 +104,10 @@ zch() {
     echo "Error: $ERROR_MESSAGE"
   elif [[ -n "$COMMAND" && -d .git ]]; then
     if [[ "$COMMAND" =~ ^git ]]; then
+      print -P ""
       print -P "$promp_default $COMMAND"
-      read -q "REPLY?  Execute command? (y/n) "
-      if [[ "$REPLY" =~ ^[Yy]$ ]]; then
-        echo
-        eval "$COMMAND"
-      else
-        echo
-        print -P "$promp_error command not executed."
-      fi
+      print -P ""
+      eval "$COMMAND"
     else
       print -P "$promp_error output does not begin with git and it will not be executed."
       print -P "$COMMAND"
@@ -121,7 +116,9 @@ zch() {
     print -P "$promp_error unable to generate a command."
     print -P "$COMMAND"
   elif [[ -n "$COMMAND" ]]; then
+    print -P ""
     print -P "$promp_default $COMMAND"
+    print -P ""
     eval "$COMMAND"
   else
     print -P "$promp_error unexpected response."

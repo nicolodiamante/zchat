@@ -36,8 +36,9 @@ fpath=(~/zchat/script \$fpath)
 autoload -Uz zchat
 
 # Zchat dependencies.
+# It's important to note that only APIs with a record of successful payments can access the GPT-4 API. If the GPT-4 qualifications are not met, it's advisable to use the GPT-3.5-Turbo model.
 export OPENAI_API_KEY=""
-export OPENAI_GPT_MODEL="gpt-3.5-turbo"
+export OPENAI_GPT_MODEL="gpt-4"
 EOF
   echo 'zsh: appended zchat to zshrc.'
 
