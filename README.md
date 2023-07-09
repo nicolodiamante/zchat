@@ -113,8 +113,8 @@ zch <description of task>
 
 <p align="center">
   <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="https://github.com/nicolodiamante/zchat/assets/48920263/ee1f5e25-1480-4bb8-9986-853d8964ea02" draggable="false" ondragstart="return false;" alt="Zchat Completion" title="Zchat Completion" />
-    <img src="https://github.com/nicolodiamante/zchat/assets/48920263/fd62ca6a-7c51-42a4-a82d-4bc05f3ea3d9" draggable="false" ondragstart="return false; "alt="Zchat Completion" title="Zchat Completion" width="650px" />
+    <source media="(prefers-color-scheme: dark)" srcset="https://github.com/nicolodiamante/zchat/assets/48920263/e53ab64f-db94-400c-adb3-3fb1cfbbe58b" draggable="false" ondragstart="return false;" alt="Zchat Completion" title="Zchat Completion" />
+    <img src="https://github.com/nicolodiamante/zchat/assets/48920263/c9301569-52e3-4999-b899-fdaf6a066959" draggable="false" ondragstart="return false; "alt="Zchat Completion" title="Zchat Completion" width="650px" />
   </picture>
 </p>
 
