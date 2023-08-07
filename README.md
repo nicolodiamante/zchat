@@ -37,7 +37,7 @@ Once you have obtained your [API Key][open-ai-API], integrating ChatGPT's servic
 
 <p align="center">
   <picture>
-    <img src="https://github.com/nicolodiamante/zchat/assets/48920263/270af1e8-7d23-4c6a-9c1c-404908b2d1cc" draggable="false" ondragstart="return false; "alt="IMG show an example of a OpenAI API Key" title="OpenAI API Key" width="750px" />
+    <img src="https://github.com/nicolodiamante/zchat/assets/48920263/8db385ed-d310-4fb0-a8a5-5dc3514ca357" draggable="false" ondragstart="return false; "alt="IMG show an example of a OpenAI API Key" title="OpenAI API Key" width="750px" />
   </picture>
 </p>
 
@@ -82,7 +82,7 @@ git clone https://github.com/nicolodiamante/zchat.git $ZSH_CUSTOM/plugins/zchat
 - Add to your zshrc plugins array `plugins=(... zchat)`
 - Paste your API Key at the `OPENAI_API_KEY` variable in your zshrc.
 - Restart the shell to activate.
-<br><br>
+  <br><br>
 
 ### Setting up dependencies
 
@@ -113,8 +113,8 @@ zch <description of task>
 
 <p align="center">
   <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="https://github.com/nicolodiamante/zchat/assets/48920263/e53ab64f-db94-400c-adb3-3fb1cfbbe58b" draggable="false" ondragstart="return false;" alt="Zchat Completion" title="Zchat Completion" />
-    <img src="https://github.com/nicolodiamante/zchat/assets/48920263/c9301569-52e3-4999-b899-fdaf6a066959" draggable="false" ondragstart="return false; "alt="Zchat Completion" title="Zchat Completion" width="650px" />
+    <source media="(prefers-color-scheme: dark)" srcset="https://github.com/nicolodiamante/zchat/assets/48920263/0a2f6192-5000-4b35-a063-dd7952b22084" draggable="false" ondragstart="return false;" alt="Zchat Completion" title="Zchat Completion" />
+    <img src="https://github.com/nicolodiamante/zchat/assets/48920263/7d4091d1-fec2-4cd9-ba9b-36ed2f207e1a" draggable="false" ondragstart="return false; "alt="Zchat Completion" title="Zchat Completion" width="650px" />
   </picture>
 </p>
 
@@ -162,6 +162,7 @@ Thank you for considering using Zchat. Any suggestions or feedback you may have 
 </p>
 
 <!-- Link labels: -->
+
 [open-ai-account]: https://chat.openai.com/auth/login
 [open-ai-API]: https://beta.openai.com/account/api-keys
 [open-ai-models]: https://platform.openai.com/docs/models
