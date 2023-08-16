@@ -28,7 +28,8 @@ if [[ -z "$CMD" ]]; then
 else
   echo 'Installing simple prompt...'
   mkdir -p "$TARGET"
-    if eval "$CMD"; then
+
+  if eval "$CMD"; then
     cd "$TARGET" && source "$INSTALL"
   else
     echo "Installation failed. Aborting!"
