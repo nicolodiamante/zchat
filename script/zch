@@ -125,3 +125,5 @@ zch() {
     print -P "$COMMAND"
   fi
 }
+
+unset zch

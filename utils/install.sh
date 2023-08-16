@@ -1,11 +1,14 @@
 #!/bin/sh
 
 #
-# Install zchat
+# Install Zchat
 #
 
-# Determines the current user's shell, if `zsh` then installs.
-[[ "$(basename -- "$SHELL")" == "zsh" ]] || exit 1
+# Determines the current user's shell, if not `zsh` then exit.
+if [[ "$(basename -- "$SHELL")" != "zsh" ]]; then
+  echo "Please switch to zsh shell to continue."
+  exit 1
+fi
 
 # Check for Homebrew, else install.
 echo 'Checking for Homebrew...'
@@ -29,8 +32,8 @@ zchatat="${0:h}/script/zchat"
 chmod +x $zchat
 
 if [[ -d "$SCRIPT" && -f "$ZSHRC" ]]; then
-  # Appends to `zshrc`.
-  cat << EOF >> ${ZSHRC}
+# Append the necessary lines to zshrc.
+cat << EOF >> ${ZSHRC}
 # Zchat path.
 fpath=(~/zchat/script \$fpath)
 autoload -Uz zchat
@@ -40,7 +43,7 @@ autoload -Uz zchat
 export OPENAI_API_KEY=""
 export OPENAI_GPT_MODEL="gpt-4"
 EOF
-  echo 'zsh: appended zchat to zshrc.'
+  echo 'zsh: appended Zchat's necessary lines to .zshrc'
 
   # Reloads shell.
   source "${ZSHRC}"
