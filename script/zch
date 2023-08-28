@@ -24,7 +24,7 @@ zch() {
   fi
 
   if [[ -z "$OPENAI_GPT_MODEL" ]]; then
-    echo "zchat: It seems the OPENAI_GPT_MODEL is not specified. By default, this script operates on the GPT-4 model. Comparatively, the GPT-4 and GPT-3.5 models display minimal differences in performance for less complex tasks. However, GPT-4 significantly outshines previous models in handling intricate reasoning scenarios. It's important to note that only APIs with a record of successful payments can access the GPT-4 API. If the GPT-4 qualifications are not met, it's advisable to use the GPT-3.5-Turbo model."
+    echo "zchat: It seems the OPENAI_GPT_MODEL is not specified. By default, this script operates on the GPT-4 model. When compared, the performance of GPT-4 and GPT-3.5 models in handling less complex tasks shows negligible differences. However, when it comes to intricate reasoning scenarios, the GPT-4 model clearly outperforms its predecessors. Please note, that access to the GPT-4 API is limited to APIs that have a proven track record of successful payments. In the event that you don't meet the GPT-4 qualifications, it's recommended the use the GPT-3.5-Turbo model."
     return 1
   else
     chatGPT_model="$OPENAI_GPT_MODEL"
@@ -50,17 +50,17 @@ zch() {
 # Request body.
   user_input="$@"
   model="$chatGPT_model"
-  temperature=0.16
+  temperature=0.12
   top_p=1
   presence_penalty=0.0
   frequency_penalty=0.0
-  max_tokens=1024
+  max_tokens=512
 
   # Prompt.
   if [[ -d .git ]]; then
-    message="As Zchat, your role is to act as an autocomplete program that assists me in managing my Linux operating system. Your base of operations begins from the currently active directory, which also doubles as a git repository for version control purposes. Upon receiving my inquiry captured in the variable ${user_input}, you have the task of identifying and recommending a suitable GIT command that I can input into the Linux terminal for execution. Keep in mind, the command issued should strictly be valid GIT software commands and pertinent to the ${OS} operating system. Ensure to exclude any additional information from the response and focus solely on delivering the mapped GIT commands. Your responses should, at all times, lack any explanation or clarifications that a human would find elucidative. In the event you are unable to deduce or produce a GIT command based on my input, it's required for you to give the following response: 'zchat: failed to generate command'. This will indicate that the formulation of a suitable command was unsuccessful."
+    message="As an advanced autocomplete program named Zchat, your duty is to assist the User in managing their Linux operating system. Your operations start from the active directory, which serves as a GIT repository for controlling versions. When the User's query captured in ${user_input} is received, your task is to identify and suggest an appropriate GIT command that the user can execute in the Linux terminal. Bear in mind that the recommended command must be valid and compatible with the ${OS} operating system, excluding any supplementary information. Keep the responses limited to providing suitable GIT commands without any human-understandable clarifications or explanations. If you fail to infer or develop a GIT command based on the user’s input, respond with 'zchat: failed to generate command', signifying the unsuccessful generation of a suitable command."
   else
-    message="You are to act as Zchat, an autocomplete script that I utilise as an aid in manoeuvring my Linux operating system. Your function largely revolves around fielding all queries that I have pertaining to the Linux operating system. In light of this, I now require your assistance - outlined as ${user_input} - and am requesting a response. The expected response from you should be a valid ${OS} command, to be presented as an uncomplicated, solitary line of text. Please abstain from the use of code blocks or quotes; keep everything within the scope of the command you provide. The command you propose should accommodate the consideration of my existing directory, which can be signified by either a simple '.' or the command `$(pwd)`. Make sure that the command you offer does not pose any risk to the integrity or stability of my operating system. It's agreeable to chain multiple commands together if necessary, but with a preferable emphasis placed on simplicity - aim to propose one-liner commands where possible. In the eventuality that you are unable to generate a suitable command based on my request, the appropriate response should be: 'zchat: failed to generate command'."
+    message="You are to serve as Zchat, an autocomplete script that assists the user with their Linux operating system. Your primary role is to answer all of the user's questions about the Linux operating system. Accordingly, the user now needs your help, defined as ${user_input}, and asks for a response. The expected reply from you should be a valid ${OS} command, presented as a simple, single line of text. Please avoid using code blocks or quotes; maintain everything within the confines of the command you provide. The command you offer should take into account the user's current directory, identified by either a '.' or the command `$(pwd)`. Ensure that the command you suggest does not threaten the reliability or stability of the user's operating system. It's acceptable to link multiple commands if needed, but keep it as simple as possible - aim for one-liner commands when feasible. If you cannot create a suitable command based on the user's request, the appropriate response would be: 'zchat: failed to generate command'."
   fi
 
   if command -v curl &> /dev/null; then

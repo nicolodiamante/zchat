@@ -39,7 +39,8 @@ fpath=(~/zchat/script \$fpath)
 autoload -Uz zchat
 
 # Zchat dependencies.
-# It's important to note that only APIs with a record of successful payments can access the GPT-4 API. If the GPT-4 qualifications are not met, it's advisable to use the GPT-3.5-Turbo model.
+# Only APIs with a history of successful payments can use the GPT-4 API.
+# If you don't qualify for GPT-4, consider using GPT-3.5-Turbo model.
 export OPENAI_API_KEY=""
 export OPENAI_GPT_MODEL="gpt-4"
 EOF
