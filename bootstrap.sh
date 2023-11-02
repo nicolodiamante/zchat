@@ -6,7 +6,7 @@
 SOURCE="https://github.com/nicolodiamante/zchat"
 TARBALL="${SOURCE}/tarball/master"
 TARGET="${HOME}/zchat"
-TAR_CMD="tar -xzv -C "${TARGET}" --strip-components 1 --exclude .gitignore"
+TAR_CMD="tar -xzv -C \"${TARGET}\" --strip-components 1 --exclude .gitignore"
 
 INSTALL=./utils/install.sh
 

@@ -19,21 +19,22 @@ fi
 
 # Check for jq, else install.
 if ! command -v jq >/dev/null; then
-  echo 'zchat: jp dependency is missing! Installing it...'
+  echo 'zchat: jq dependency is missing! Installing it...'
   brew install jq
 fi
 
 # Defines the PATHs.
 SCRIPT="${HOME}/zchat/script"
-ZSHRC="${ZDOTDIR:-${XDG_CONFIG_HOME/zsh:-$HOME}}/.zshrc"
+ZSHRC="${ZDOTDIR:-${XDG_CONFIG_HOME:-$HOME}/zsh}/.zshrc"
 
 # Make script executable.
-zchatat="${0:h}/script/zchat"
+zchat="${0:h}/script/zchat"
 chmod +x $zchat
 
-if [[ -d "$SCRIPT" && -f "$ZSHRC" ]]; then
-# Append the necessary lines to zshrc.
-cat << EOF >> ${ZSHRC}
+# Only append to zshrc if the necessary lines are not present already.
+if ! grep -q "fpath=(~/zchat/script" "${ZSHRC}"; then
+  if [[ -f "$ZSHRC" ]]; then
+    cat << EOF >> ${ZSHRC}
 # Zchat path.
 fpath=(~/zchat/script \$fpath)
 autoload -Uz zchat
@@ -44,10 +45,13 @@ autoload -Uz zchat
 export OPENAI_API_KEY=""
 export OPENAI_GPT_MODEL="gpt-4"
 EOF
-  echo 'zsh: appended Zchat's necessary lines to .zshrc'
-
-  # Reloads shell.
-  source "${ZSHRC}"
+    echo "zsh: appended Zchat's necessary lines to .zshrc"
+  else
+    echo 'zsh: zshrc not found!'
+  fi
 else
-  echo 'zsh: zshrc not found!'
+  echo "zsh: Zchat's lines already present in .zshrc"
 fi
+
+# Reminder for the user.
+echo "Remember to insert your OPENAI_API_KEY in ~/.zshrc and then either source it or open a new terminal session."

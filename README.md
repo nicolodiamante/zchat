@@ -45,25 +45,31 @@ Once you have obtained your [API Key][open-ai-API], integrating ChatGPT's servic
 
 ## Getting Started
 
-Download the repository via curl:
+Here are the two methods you can choose from:
+
+**Automatic Download via `curl`**: Simply execute the following command in your terminal to quickly download and seamlessly install the utility:
 
 ```shell
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/nicolodiamante/zchat/HEAD/bootstrap.sh)"
 ```
 
-Alternatively, clone manually:
+**Manual Cloning**: For those who prefer a hands-on approach, you can manually clone the repository to your desired location (`~/zchat` in this case):
 
 ```shell
 git clone https://github.com/nicolodiamante/zchat.git ~/zchat
 ```
 
-Head over into the directory and then:
+<br>
+
+### Post-Download Steps
+
+**Directory Navigation & Script Execution**: Navigate to the repository's `utils` directory and execute the installation script:
 
 ```shell
-cd utils && source install.sh
+source install.sh
 ```
 
-The script will search for the file zshrc, then append the file path `zchat/script` to the variable fpath and set the `OPENAI_API_KEY` variable.
+**Zchat Configuration**: This script aims to locate the `zshrc` file, then appends the path `zchat/script` to the `fpath` variable, and sets the `OPENAI_API_KEY` variable.
 
 ```shell
 # Zchat path.
