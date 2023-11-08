@@ -14,8 +14,9 @@ fi
 echo 'Checking for Homebrew...'
 if ! command -v brew >/dev/null; then
   echo 'Homebrew is missing and is required to install dependencies.'
-  read "confirm?Do you want to install Homebrew? (y/N) "
-  if [[ $confirm == [yY]* ]]; then
+  read -q "REPLY?Do you want to install Homebrew? [y/N] ";
+  echo ""
+  if [[ "$REPLY" == [yY]* ]]; then
     echo 'Installing Homebrew...'
     /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)" || {
       echo "Failed to install Homebrew."
@@ -32,8 +33,9 @@ fi
 # Check for jq, else ask to install.
 if ! command -v jq >/dev/null; then
   echo 'jq is required for Zchat.'
-  read "confirm?Do you want to install jq using Homebrew? (y/N) "
-  if [[ $confirm == [yY]* ]]; then
+  read -q "REPLY?Do you want to install jq using Homebrew? [y/N] ";
+  echo ""
+  if [[ "$REPLY" == [yY]* ]]; then
     echo 'Installing jq dependency...'
     brew install jq || {
       echo "Failed to install jq."
@@ -48,15 +50,21 @@ fi
 # Defines the PATH for the .zshrc.
 ZSHRC="${XDG_CONFIG_HOME:-$HOME}/.zshrc"
 
-# Make the Zchat script executable.
-chmod +x "${HOME}/zchat/script/zchat" || {
-  echo "Failed to make the Zchat script executable."
+# Check if zchat script exists and make it executable.
+if [[ -f "${HOME}/zchat/script/zchat" ]]; then
+  chmod +x "${HOME}/zchat/script/zchat" || {
+    echo "Failed to make the Zchat script executable."
+    exit 1
+  }
+else
+  echo "The Zchat script does not exist at ${HOME}/zchat/script/zchat."
   exit 1
-}
+fi
 
 # Backup .zshrc before updating.
 if [[ -f "$ZSHRC" ]]; then
-  cp "${ZSHRC}" "${ZSHRC}.bak" || { echo "Failed to backup .zshrc."; exit 1; }
+  BACKUP="${ZSHRC}.bak_$(date +%F-%H%M%S)"
+  cp "${ZSHRC}" "${BACKUP}" || { echo "Failed to backup .zshrc."; exit 1; }
 fi
 
 # Update .zshrc.

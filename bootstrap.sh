@@ -17,7 +17,7 @@ is_executable() {
 
 # Ensure TARGET directory doesn't already exist.
 if [[ -d "$TARGET" ]]; then
-  echo "Target directory $TARGET already exists. Please remove or rename it and try again."
+  echo "Target directory ${TARGET} already exists. Please remove or rename it and try again."
   exit 1
 fi
 
