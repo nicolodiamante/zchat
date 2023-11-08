@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/zsh
 
 #
 # Install Zchat
@@ -10,33 +10,61 @@ if [[ "$(basename -- "$SHELL")" != "zsh" ]]; then
   exit 1
 fi
 
-# Check for Homebrew, else install.
+# Check for Homebrew, else ask to install.
 echo 'Checking for Homebrew...'
 if ! command -v brew >/dev/null; then
-  echo 'Brew is missing! Installing it...'
-  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+  echo 'Homebrew is missing and is required to install dependencies.'
+  read "confirm?Do you want to install Homebrew? (y/N) "
+  if [[ $confirm == [yY]* ]]; then
+    echo 'Installing Homebrew...'
+    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)" || {
+      echo "Failed to install Homebrew."
+      exit 1
+    }
+  else
+    echo "Homebrew installation aborted by the user. Homebrew is required to install Zchat dependencies."
+    exit 1
+  fi
+else
+  echo 'Homebrew is already installed.'
 fi
 
-# Check for jq, else install.
+# Check for jq, else ask to install.
 if ! command -v jq >/dev/null; then
-  echo 'zchat: jq dependency is missing! Installing it...'
-  brew install jq
+  echo 'jq is required for Zchat.'
+  read "confirm?Do you want to install jq using Homebrew? (y/N) "
+  if [[ $confirm == [yY]* ]]; then
+    echo 'Installing jq dependency...'
+    brew install jq || {
+      echo "Failed to install jq."
+      exit 1
+    }
+  else
+    echo "jq installation aborted by the user. jq is required for Zchat to function properly."
+    exit 1
+  fi
 fi
 
-# Defines the PATHs.
-SCRIPT="${HOME}/zchat/script"
-ZSHRC="${ZDOTDIR:-${XDG_CONFIG_HOME:-$HOME}/zsh}/.zshrc"
+# Defines the PATH for the .zshrc.
+ZSHRC="${XDG_CONFIG_HOME:-$HOME}/.zshrc"
 
-# Make script executable.
-zchat="${0:h}/script/zchat"
-chmod +x $zchat
+# Make the Zchat script executable.
+chmod +x "${HOME}/zchat/script/zchat" || {
+  echo "Failed to make the Zchat script executable."
+  exit 1
+}
 
-# Only append to zshrc if the necessary lines are not present already.
-if ! grep -q "fpath=(~/zchat/script" "${ZSHRC}"; then
+# Backup .zshrc before updating.
+if [[ -f "$ZSHRC" ]]; then
+  cp "${ZSHRC}" "${ZSHRC}.bak" || { echo "Failed to backup .zshrc."; exit 1; }
+fi
+
+# Update .zshrc.
+if ! grep -q "fpath=(${HOME}/zchat/script" "${ZSHRC}"; then
   if [[ -f "$ZSHRC" ]]; then
-    cat << EOF >> ${ZSHRC}
+    cat << EOF >> "${ZSHRC}"
 # Zchat path.
-fpath=(~/zchat/script \$fpath)
+fpath=(${HOME}/zchat/script \$fpath)
 autoload -Uz zchat
 
 # Zchat dependencies.
@@ -45,12 +73,13 @@ autoload -Uz zchat
 export OPENAI_API_KEY=""
 export OPENAI_GPT_MODEL="gpt-4"
 EOF
-    echo "zsh: appended Zchat's necessary lines to .zshrc"
+    echo "Appended Zchat's necessary lines to .zshrc"
   else
-    echo 'zsh: zshrc not found!'
+    echo 'Error: .zshrc not found!'
+    exit 1
   fi
 else
-  echo "zsh: Zchat's lines already present in .zshrc"
+  echo "Zchat's lines are already present in .zshrc"
 fi
 
 # Reminder for the user.
