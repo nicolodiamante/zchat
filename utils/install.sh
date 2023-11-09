@@ -86,13 +86,12 @@ fi
 if ! grep -q "fpath=(${HOME}/zchat/script" "${ZSHRC}"; then
   if [[ -f "$ZSHRC" ]]; then
     cat << EOF >> "${ZSHRC}"
-# Zchat path.
+
+# Zchat PATH.
 fpath=(${HOME}/zchat/script \$fpath)
 autoload -Uz zchat
 
 # Zchat dependencies.
-# Only APIs with a history of successful payments can use the GPT-4 API.
-# If you don't qualify for GPT-4, consider using GPT-3.5-Turbo model.
 export OPENAI_API_KEY=""
 export OPENAI_GPT_MODEL="gpt-4"
 EOF

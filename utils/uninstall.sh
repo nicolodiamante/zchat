@@ -9,14 +9,6 @@ SCRIPT_DIR="${HOME}/zchat/script"
 ZSHRC="${XDG_CONFIG_HOME:-$HOME}/.zshrc"
 ZSHRC_BACKUP_GLOB="${ZSHRC}.bak_*"
 
-# Remove the Zchat script directory.
-if [[ -d "$SCRIPT_DIR" ]]; then
-  echo "Removing the Zchat script directory..."
-  rm -rf "$SCRIPT_DIR"
-else
-  echo "Zchat script directory not found. It may have already been removed."
-fi
-
 # Check for .zshrc and back it up before making changes.
 if [[ -f "$ZSHRC" ]]; then
   echo "Found .zshrc at ${ZSHRC}. Backing up .zshrc..."
@@ -58,15 +50,17 @@ if [[ -f "$ZSHRC" ]]; then
   if [[ "$REPLY" =~ ^[Yy]$ ]]; then
     # Use 'sed' to remove lines related to Zchat.
     if [[ "$OSTYPE" == "darwin"* ]]; then
-      sed -i '' '/# Zchat path./d' "$ZSHRC"
+      sed -i '' '/# Zchat PATH./d' "$ZSHRC"
       sed -i '' "/fpath=\(${SCRIPT_DIR//\//\\/} \$fpath\)/d" "$ZSHRC"
       sed -i '' '/autoload -Uz zchat/d' "$ZSHRC"
+      sed -i '' '/# Zchat dependencies./d' "$ZSHRC"
       sed -i '' '/export OPENAI_API_KEY=""/d' "$ZSHRC"
       sed -i '' '/export OPENAI_GPT_MODEL="gpt-4"/d' "$ZSHRC"
     else
-      sed -i '/# Zchat path./d' "$ZSHRC"
+      sed -i '/# Zchat PATH./d' "$ZSHRC"
       sed -i "/fpath=\(${SCRIPT_DIR//\//\\/} \$fpath\)/d" "$ZSHRC"
       sed -i '/autoload -Uz zchat/d' "$ZSHRC"
+      sed -i '/# Zchat dependencies./d' "$ZSHRC"
       sed -i '/export OPENAI_API_KEY=""/d' "$ZSHRC"
       sed -i '/export OPENAI_GPT_MODEL="gpt-4"/d' "$ZSHRC"
     fi
