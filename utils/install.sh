@@ -1,7 +1,7 @@
 #!/bin/zsh
 
 #
-# Install Zchat
+# Install Zchat.
 #
 
 # Determines the current user's shell, if not `zsh` then exit.

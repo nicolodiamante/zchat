@@ -1,6 +1,8 @@
 #!/bin/zsh
 
-# Uninstall Zchat
+#
+# Uninstall Zchat.
+#
 
 echo "Starting the uninstallation process of Zchat..."
 
