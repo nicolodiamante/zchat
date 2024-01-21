@@ -92,12 +92,11 @@ git clone https://github.com/nicolodiamante/zchat.git $ZSH_CUSTOM/plugins/zchat
 
 ### Setting up dependencies
 
-After completing the installation process, please open your zshrc file. Copy and paste your OpenAI API Key into the `OPENAI_API_KEY` variable slot. The script is programmed to use the GPT-4 models by default. However, it should be noted that access to GPT-4 API is limited only to APIs with proven successful payment history. If you have not met the qualifications for accessing GPT-4, we recommend opting for the GPT-3.5-Turbo model instead.
+After completing the installation process, configuration of the Zchat application is required. This step involves inserting the OpenAI API Key into the OPENAI_API_KEY variable located in the .zshrc file. By default, the script uses the GPT-4 Turbo model. However, access to GPT-4 APIs, including both GPT-4 and GPT-4 Turbo, may be limited and generally requires a proven history of successful transactions with OpenAI. If the necessary criteria for accessing GPT-4 or GPT-4 Turbo are not met, or if an alternative model is desired, the script can be adapted to utilise other models, such as GPT-3.5-Turbo. In instances where neither GPT-4 Turbo nor GPT-4 is accessible, opting for GPT-3.5-Turbo is advised.
 
 ```shell
 # Zchat dependencies.
 export OPENAI_API_KEY=
-export OPENAI_GPT_MODEL=gpt-4
 ```
 
 > For Zchat to function properly, jq must be installed on your operating system. The script will automatically check for this software. If it isn't detected, the script will proceed with the necessary installation.
