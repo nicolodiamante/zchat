@@ -47,13 +47,13 @@ Once you have obtained your [API Key][open-ai-API], integrating ChatGPT's servic
 
 Here are the two methods you can choose from:
 
-**Automatic Download via `curl`**: Simply execute the following command in your terminal to quickly download and seamlessly install the utility:
+**Automatic Download via `curl`:** Simply execute the following command in your terminal to quickly download and seamlessly install the utility:
 
 ```shell
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/nicolodiamante/zchat/HEAD/bootstrap.sh)"
+zsh -c "$(curl -fsSL https://raw.githubusercontent.com/nicolodiamante/zchat/HEAD/bootstrap.zsh)"
 ```
 
-**Manual Cloning**: For those who prefer a hands-on approach, you can manually clone the repository to your desired location (`~/zchat` in this case):
+**Manual Cloning:** For those who prefer a hands-on approach, you can manually clone the repository:
 
 ```shell
 git clone https://github.com/nicolodiamante/zchat.git ~/zchat
@@ -63,13 +63,13 @@ git clone https://github.com/nicolodiamante/zchat.git ~/zchat
 
 ### Post-Download Steps
 
-**Directory Navigation & Script Execution**: Navigate to the repository's `utils` directory and execute the installation script:
+**Directory Navigation & Script Execution:** Navigate to the root directory of the repository, and then execute the installation script using the following command:
 
 ```shell
-source install.sh
+source utils/install.zsh
 ```
 
-**Zchat Configuration**: This script aims to locate the `zshrc` file, then appends the path `zchat/script` to the `fpath` variable, and sets the `OPENAI_API_KEY` variable.
+**Zchat Configuration:** This script aims to locate the `zshrc` file, then appends the path `zchat/script` to the `fpath` variable, and sets the `OPENAI_API_KEY` variable.
 
 ```shell
 # Zchat path.
@@ -92,12 +92,12 @@ git clone https://github.com/nicolodiamante/zchat.git $ZSH_CUSTOM/plugins/zchat
 
 ### Setting up dependencies
 
-After completing the installation process, please open your zshrc file. Copy and paste your OpenAI API Key into the `OPENAI_API_KEY` variable slot. The script is programmed to use the GPT-4 model by default. However, it should be noted that access to GPT-4 API is limited only to APIs with proven successful payment history. If you have not met the qualifications for accessing GPT-4, we recommend opting for the GPT-3.5-Turbo model instead.
+After completing the installation process, please open your zshrc file. Copy and paste your OpenAI API Key into the `OPENAI_API_KEY` variable slot. The script is programmed to use the GPT-4 models by default. However, it should be noted that access to GPT-4 API is limited only to APIs with proven successful payment history. If you have not met the qualifications for accessing GPT-4, we recommend opting for the GPT-3.5-Turbo model instead.
 
 ```shell
 # Zchat dependencies.
-export OPENAI_API_KEY=""
-export OPENAI_GPT_MODEL="gpt-4"
+export OPENAI_API_KEY=
+export OPENAI_GPT_MODEL=gpt-4
 ```
 
 > For Zchat to function properly, jq must be installed on your operating system. The script will automatically check for this software. If it isn't detected, the script will proceed with the necessary installation.
@@ -155,9 +155,9 @@ Thank you for considering using Zchat. Any suggestions or feedback you may have 
 </p>
 
 <p align="center">
-  <picture>
-    <img src="https://github.com/nicolodiamante/zchat/assets/48920263/a2d53e2d-ed83-483d-b27a-4c1f04c15061" draggable="false" ondragstart="return false;" alt="Nicol&#242; Diamante" title="Nicol&#242; Diamante" width="17px" />
-  </picture>
+  <a href="https://nicolodiamante.com" target="_blank">
+    <img src="https://github.com/nicolodiamante/zchat/assets/48920263/a2d53e2d-ed83-483d-b27a-4c1f04c15061" draggable="false" ondragstart="return false;" alt="Nicol&#242; Diamante Portfolio" title="Nicol&#242; Diamante" width="17px" />
+  </a>
 </p>
 
 <p align="center">
